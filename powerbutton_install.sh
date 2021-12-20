@@ -3,7 +3,7 @@
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
 #branch="development"
-version="1.0.4 - 20211220"
+version="1.0.5 - 20211220"
 repo="https://github.com/PM84/raspberry_pi_power_on_off.git"
 branch="main"
 
@@ -13,6 +13,7 @@ cyan="\e[1;36m"
 yellow="\e[1;93m"
 green="\e[1;92m"
 installPath="/home/pi/raspberry_pi_power_on_off"
+installPathHome="raspberry_pi_power_on_off"
 insttype=""
 
 clear
@@ -195,7 +196,8 @@ while [ ${gpioready} = 0 ]; do
 	do
 		case $opt in
 			"GPIO settings are OK")
-			    sudo echo "SD_GPIO = ${sdgpio}" > ${installPath}/config.py
+                file="${installPathHome}/.env"
+                sudo echo "SD_GPIO=${sdgpio}" > $file
 				gpioready=1
 				break
 				;;
