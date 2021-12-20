@@ -19,6 +19,7 @@ Press the button again will start the raspberry pi immediately.
 
 ## Material
 1x Arcade Button (e.g. https://amzn.to/326GRXv)
+
 2x Jumper Wire (F2F - Female to Female; e.g. https://amzn.to/32eEJgb)
 
 ## Soldering
