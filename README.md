@@ -1,4 +1,4 @@
-Date: 20.12.2021 Version: 1.0.3 - 20211220
+Date: 20.12.2021 Version: 1.0.4 - 20211220
 # Power-On-OFF Button for Raspberry Pi (especially used in Phoniebox)
 
 ## One-Line Installer.
