@@ -22,6 +22,8 @@ Press the button again will start the raspberry pi immediately.
 
 2x Jumper Wire (F2F - Female to Female; e.g. https://amzn.to/32eEJgb)
 
+2x Shrink tubing (e.g. https://amzn.to/32lvhrd)
+
 ## Soldering
 Cut off one end of each cable.
 
