@@ -19,14 +19,14 @@ clear
 echo -e "///////////////////////////////////////////////////////////////////////////////////////";
 echo -e "///${cyan}       ____                             _             _    _                     ${nocolor}///";
 echo -e "///${cyan}      |  _ \ _____        __ ___  _ __ | |__   _   _ | |_ | |_  ___  _ __        ${nocolor}///";
-echo -e "///${cyan}      | |_) / _ \ \   ^  / // _ \| '__|| '_ \ | | | || __|| __|/ _ \| '_  \      ${nocolor}///";
+echo -e "///${cyan}      | |_) / _ \  \  ^  / // _ \| '__|| '_ \ | | | || __|| __|/ _ \| '_  \      ${nocolor}///";
 echo -e "///${cyan}      |  __/ (_) |\ \/ \/ /   __/| |   | |_) || |_| || |_ | |_  (_) | | | |      ${nocolor}///";
 echo -e "///${cyan}      |_|   \___/  \_/ \_/  \___||_|   |_.__/  \___/  \__| \__|\___/|_| |_|      ${nocolor}///";
 echo -e "///${cyan}        __              ____  ____  _                                            ${nocolor}///";
 echo -e "///${cyan}       / _| ___  _ __  |  _ \|  _ \(_)                                           ${nocolor}///";
 echo -e "///${cyan}      | |_ / _ \| '__| | |_) | |_) | |                                           ${nocolor}///";
 echo -e "///${cyan}      |  _| (_) | |    |    /|  __/| |                                           ${nocolor}///";
-echo -e "///${cyan}      |_|  \___/|_|    |_|\__|_|   |_|                                           ${nocolor}///";
+echo -e "///${cyan}      |_|  \___/|_|    |_|\_\|_|   |_|                                           ${nocolor}///";
 echo -e "///${cyan}                                                                                 ${nocolor}///";
 echo -e "///${green}                            developed by Peter Mayer                            ${nocolor}///";                                                                    
 echo -e "///${cyan}                                                                                 ${nocolor}///";
@@ -90,15 +90,15 @@ echo -e ""
 
 if [ "$insttype" = "i" ]
 then
-    read -n 1 -s -r -p "Service removed. Press any key to continue"
+    read -n 1 -s -r -p "Listener removed. Press any key to continue"
 else
-	echo -e "${green}Service successfully removed...${nocolor}"
+	echo -e "${green}Listener successfully removed...${nocolor}"
     echo -e ""
 	exit
 fi
 
-
 clear
+
 cd
 echo -e "////////////////////////////////////////////////////////////////////"
 echo -e "///${cyan}   Check/Install Prerequirements:                             ${nocolor}///"
@@ -196,7 +196,7 @@ while [ ${gpioready} = 0 ]; do
 		case $opt in
 			"GPIO settings are OK")
                 file=".env"
-                echo "SD_GPIO=${sdgpio}" > $file
+                sudo echo "SD_GPIO=${sdgpio}" > $file
 				gpioready=1
 				break
 				;;
@@ -242,11 +242,11 @@ set -e
 cd "$(dirname "$0")/.."
 
 echo "=> Installing shutdown listener...\n"
-sudo cp shutdownlistener.py /usr/local/bin/
+sudo cp ${installPath}/shutdownlistener.py /usr/local/bin/
 sudo chmod +x /usr/local/bin/shutdownlistener.py
 
 echo "=> Starting shutdown listener...\n"
-sudo cp shutdownlistener.sh /etc/init.d/
+sudo cp ${installPath}/shutdownlistener.sh /etc/init.d/
 sudo chmod +x /etc/init.d/shutdownlistener.sh
 
 sudo update-rc.d shutdownlistener.sh defaults
