@@ -14,4 +14,18 @@ Connect an arcade button to GPIO3 and a GND pin.
 Use the one line installer.
 
 Press the button at least 2 seconds to shut the pi down.
+
 Press the button again will start the raspberry pi immediately.
+
+## Material
+1x Arcade Button (e.g. https://amzn.to/326GRXv)
+2x Jumper Wire (F2F - Female to Female; e.g. https://amzn.to/32eEJgb)
+
+## Soldering
+Cut off one end of each cable.
+
+Thread in the heat shrink tubing.
+
+Solder the cut end to the button.
+
+Slide the heat shrink tubing over the soldered joint and shrink it.
