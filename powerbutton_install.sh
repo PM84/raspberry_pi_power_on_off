@@ -3,7 +3,7 @@
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
 #branch="development"
-version="1.0.5 - 20211220"
+version="1.0.6 - 20211220"
 repo="https://github.com/PM84/raspberry_pi_power_on_off.git"
 branch="main"
 
@@ -141,31 +141,6 @@ for p in ${packages[@]}; do
 	fi
 done
 
-# lumaPackages=()
-# for p in ${lumaPackages[@]}; do
-# 	i=0
-# 	let lLen="$lineLen"-"${#p}"
-# 	echo -n -e "   --> $p:"
-# 	while [ "$i" -lt "$lLen" ]
-# 	do
-# 		let i+=1
-# 		echo -n -e " "
-# 	done
-# 	pipInstalled=`sudo pip3 list | grep ${p}`
-# 	if [ "$pipInstalled" = "" ]
-# 	then
-# 		sudo pip3 install ${p}  > /dev/null 2>&1
-# 		pipInstalled=`sudo pip3 list | grep ${p}`
-# 		if [ "$pipInstalled" = "" ]
-# 		then
-# 			echo -e "${red}failed${nocolor}"
-# 		else
-# 			echo -e "${green}done${nocolor}"
-# 		fi
-# 	else
-# 		echo -e "${green}already installed${nocolor}"
-# 	fi
-# done
 echo -e ""
 read -n 1 -s -r -p "Press any key to continue"
 
@@ -176,37 +151,20 @@ while [ ${gpioready} = 0 ]; do
 	echo -e "///${cyan}   Set GPIO settings:                                                ${nocolor}///"
 	echo -e "///////////////////////////////////////////////////////////////////////////"
 	echo -e ""
-	echo -e "${red}Please notice:${nocolor} This step asks for the settings of the GPIOs"
-	echo -e "of your Raspberry Pi, not the physical PIN!!!"
+	echo -e "${red}Please notice:${nocolor} This step shows you the GPIO Pins the button has to be connected to:"
 	echo -e ""
-	echo -e "Adjust these values to your needs:"
-	echo -e ""
-	read -rp "  ---> Type GPIO Pin listen to:  " sdgpio
-	echo -e ""
-	echo -e ""
-	echo -e "The entered values are not checked for correctness!"
-	echo -e ""
-	echo -e "Check your GPIO-Settings:"
 	echo -e "-----------------------------------------------------"
-	echo -e "GPIO Shutdown:      ${green}${sdgpio}${nocolor}"
+	echo -e "${green}Connect pin 3 with an free GND pin${nocolor}"
 	echo -e ""
-	options=("GPIO settings are OK" "Let me adjust the settings again" "Quit")
+	options=("I got it" "Quit")
 
 	select opt in "${options[@]}"
 	do
 		case $opt in
-			"GPIO settings are OK")
-                file="${installPathHome}/.env"
-                sudo echo "SD_GPIO=${sdgpio}" > $file
+			"I got it")
 				gpioready=1
 				break
 				;;
-
-			"Let me adjust the settings again")
-				gpioready=0
-				break
-				;;
-
 			"Quit")
 				exit
 				;;
@@ -242,11 +200,11 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-echo "=> Installing shutdown listener...\n"
+echo -e "=> Installing shutdown listener..."
 sudo cp ${installPath}/shutdownlistener.py /usr/local/bin/
 sudo chmod +x /usr/local/bin/shutdownlistener.py
 
-echo "=> Starting shutdown listener...\n"
+echo -e "=> Starting shutdown listener..."
 sudo cp ${installPath}/shutdownlistener.sh /etc/init.d/
 sudo chmod +x /etc/init.d/shutdownlistener.sh
 
@@ -254,9 +212,9 @@ sudo update-rc.d shutdownlistener.sh defaults
 sudo /etc/init.d/shutdownlistener.sh start
 
 echo -e "Shutdown listener installed."
-echo " => ${green}done${nocolor}"
+echo -e " => ${green}done${nocolor}"
 echo -e ""
-echo " => ${green}done${nocolor}"
+echo -e " => ${green}done${nocolor}"
 echo -e ""
 echo -e ""
 echo -e "${green}Installation finished${nocolor}"
