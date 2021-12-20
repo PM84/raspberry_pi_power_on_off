@@ -140,31 +140,31 @@ for p in ${packages[@]}; do
 	fi
 done
 
-lumaPackages=(python-dotenv)
-for p in ${lumaPackages[@]}; do
-	i=0
-	let lLen="$lineLen"-"${#p}"
-	echo -n -e "   --> $p:"
-	while [ "$i" -lt "$lLen" ]
-	do
-		let i+=1
-		echo -n -e " "
-	done
-	pipInstalled=`sudo pip3 list | grep ${p}`
-	if [ "$pipInstalled" = "" ]
-	then
-		sudo pip3 install ${p}  > /dev/null 2>&1
-		pipInstalled=`sudo pip3 list | grep ${p}`
-		if [ "$pipInstalled" = "" ]
-		then
-			echo -e "${red}failed${nocolor}"
-		else
-			echo -e "${green}done${nocolor}"
-		fi
-	else
-		echo -e "${green}already installed${nocolor}"
-	fi
-done
+# lumaPackages=()
+# for p in ${lumaPackages[@]}; do
+# 	i=0
+# 	let lLen="$lineLen"-"${#p}"
+# 	echo -n -e "   --> $p:"
+# 	while [ "$i" -lt "$lLen" ]
+# 	do
+# 		let i+=1
+# 		echo -n -e " "
+# 	done
+# 	pipInstalled=`sudo pip3 list | grep ${p}`
+# 	if [ "$pipInstalled" = "" ]
+# 	then
+# 		sudo pip3 install ${p}  > /dev/null 2>&1
+# 		pipInstalled=`sudo pip3 list | grep ${p}`
+# 		if [ "$pipInstalled" = "" ]
+# 		then
+# 			echo -e "${red}failed${nocolor}"
+# 		else
+# 			echo -e "${green}done${nocolor}"
+# 		fi
+# 	else
+# 		echo -e "${green}already installed${nocolor}"
+# 	fi
+# done
 echo -e ""
 read -n 1 -s -r -p "Press any key to continue"
 
@@ -195,8 +195,8 @@ while [ ${gpioready} = 0 ]; do
 	do
 		case $opt in
 			"GPIO settings are OK")
-                file=${installPath}/".env"
-                sudo echo "SD_GPIO=${sdgpio}" > $file
+                file=${installPath}/"config.py"
+                sudo echo "SD_GPIO = ${sdgpio}" > $file
 				gpioready=1
 				break
 				;;
@@ -254,7 +254,7 @@ sudo /etc/init.d/shutdownlistener.sh start
 
 echo -e "Shutdown listener installed."
 echo " => ${green}done${nocolor}"
-echo -e "Check out howchoo.com for more awesome Pi projects!"
+echo -e ""
 echo " => ${green}done${nocolor}"
 echo -e ""
 echo -e ""

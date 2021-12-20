@@ -4,11 +4,7 @@
 import RPi.GPIO as GPIO
 import subprocess
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-SD_GPIO = os.getenv('SD_GPIO')
+from config import *
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SD_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
