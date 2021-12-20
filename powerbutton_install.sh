@@ -195,7 +195,7 @@ while [ ${gpioready} = 0 ]; do
 	do
 		case $opt in
 			"GPIO settings are OK")
-			    file = open(${installPath}/"config.py", "w")
+			    file = open("${installPath}/config.py", "w")
 				file.write("SD_GPIO = ${sdgpio}")
                 file.close
 				gpioready=1
