@@ -3,7 +3,7 @@
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
 #branch="development"
-version="1.0.2 - 20211220"
+version="1.0.3 - 20211220"
 repo="https://github.com/PM84/raspberry_pi_power_on_off.git"
 branch="main"
 
